@@ -85,56 +85,23 @@
   <wheel lr="left" tY="-1"/>
   <wheel lr="right" tY="1"/>
   
-  	<link name="SonarFront_frame">
-        </link>
-	<joint name="Sonar/Front_sensor_fixedjoint" type="fixed">
+  	
+	<joint name="sonar_joint" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-1.57" upper="1.57" velocity="0.1" />
 		<parent link="chassis"/>
-		<child link="SonarFront_frame"/>
+		<child link="sonar_frame"/>
 		<origin rpy="0 0.0 0" xyz="0.2 0 0.1"/>
 	</joint>
 
-  	<link name="SonarLeftFront_frame">
-        </link>
-	<joint name="Sonar/LeftFront_sensor_fixedjoint" type="fixed">
-		<parent link="chassis"/>
-		<child link="SonarLeftFront_frame"/>
-		<origin rpy="0 0.0 1.57" xyz="-0.02 0.1 0.1"/>
-	</joint>
-
-  	<link name="SonarLeftBack_frame">
-        </link>
-	<joint name="Sonar/LeftBack_sensor_fixedjoint" type="fixed">
-		<parent link="chassis"/>
-		<child link="SonarLeftBack_frame"/>
-		<origin rpy="0 0.0 1.57" xyz="-0.2 0.1 0.1"/>
-	</joint>
-        
-  	<link name="SonarRightFront_frame">
-        </link>
-	<joint name="Sonar/RightFront_sensor_fixedjoint" type="fixed">
-		<parent link="chassis"/>
-		<child link="SonarRightFront_frame"/>
-		<origin rpy="0 0.0 -1.57" xyz="-0.02 -0.1 0.1"/>
-	</joint>        
-  	<link name="SonarRightBack_frame">
-        </link>
-	<joint name="Sonar/RightBack_sensor_fixedjoint" type="fixed">
-		<parent link="chassis"/>
-		<child link="SonarRightBack_frame"/>
-		<origin rpy="0 0.0 -1.57" xyz="-0.2 -0.1 0.1"/>
-	</joint>        
-        
-    <joint name="imu_joint" type="fixed">
-        <origin xyz="0 0 0"/>
-        <parent link="chassis"/>
-        <child link="imu_link"/>
-    </joint>
-
-
-    <link name="imu_link">
+    <link name="sonar_frame">  
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.05"/>
+            <box_inertia m="0.05" x="0.02" y="0.02" z="0.15"/>
+        </inertial>   
     </link>
-        
-        
+    
     <xacro:include filename="$(find mobile_robot2_description)/urdf/mobile_robot2.gazebo" />
   
 </robot>
